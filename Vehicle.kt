@@ -1,7 +1,7 @@
 package common
 
-data class VehicleClassO(val id: Long, val name: String)
+data class VehicleClass(val id: Long?, val name: String)
 
-data class VehicleModelO(val id: Long, val name: String, val vehicleClass: VehicleClassO)
+data class VehicleModel(val id: Long?, val name: String, val vehicleClass: VehicleClass)
 
-data class VehicleO(val id: Long, val name: String, val licensePLate: String, val model: VehicleModelO)
+data class Vehicle(val id: Long?, val name: String, val licensePLate: String, val model: VehicleModel)
