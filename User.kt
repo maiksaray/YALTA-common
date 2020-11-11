@@ -14,7 +14,7 @@ object Driver : Role()
 object Admin : Role()
 
 @Serializable
-data class User(val id: Long?, val name: String, @Transient val password: String, val role: Role?)
+data class User(val id: Long?, val name: String, @Transient val password: String ="", val role: Role?)
 
 fun encode(user: User): String =
         Json.encodeToString(user)

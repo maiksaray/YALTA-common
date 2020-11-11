@@ -8,9 +8,9 @@ import kotlinx.serialization.json.Json
 sealed class Error(open val message: String)
 
 @Serializable
-data class InvalidCredentials(override val message: String) : Error(message)
+data class InvalidCredentials(val icMessage: String) : Error(icMessage)
 
 @Serializable
-data class Unauthorized(override val message: String) : Error(message)
+data class Unauthorized(val uMessage: String) : Error(uMessage)
 
 fun encode(err: Error) = Json.encodeToString(err)
