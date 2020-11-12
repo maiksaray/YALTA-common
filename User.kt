@@ -1,6 +1,5 @@
 package common
 
-import kotlinx.serialization.Serializable
 import kotlinx.serialization.*
 import kotlinx.serialization.json.Json
 
@@ -8,15 +7,19 @@ import kotlinx.serialization.json.Json
 sealed class Role
 
 @Serializable
-object Driver : Role()
+object Driver : Role() {
+    override fun toString() = "driver"
+}
 
 @Serializable
-object Admin : Role()
+object Admin : Role() {
+    override fun toString() = "admin"
+}
 
 @Serializable
-data class User(val id: Long?, val name: String, @Transient val password: String ="", val role: Role?)
+data class User(val id: Long?, val name: String, @Transient val password: String = "", val role: Role?)
 
 fun encode(user: User): String =
-        Json.encodeToString(user)
+    Json.encodeToString(user)
 
 
