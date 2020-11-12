@@ -5,12 +5,12 @@ import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 
 @Serializable
-sealed class Error(open val message: String)
+sealed class Error{abstract val message: String}
 
 @Serializable
-data class InvalidCredentials(val icMessage: String) : Error(icMessage)
+data class InvalidCredentials(override val message:String) : Error()
 
 @Serializable
-data class Unauthorized(val uMessage: String) : Error(uMessage)
+data class Unauthorized(override val message: String) : Error()
 
 fun encode(err: Error) = Json.encodeToString(err)
