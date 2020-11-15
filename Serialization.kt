@@ -180,5 +180,5 @@ object Serialization {
      *  val BadRequestString = '{"type":"BadRequest","message":"adasd"}'
      *  fromJson(BadRequestString, Error::class.java) # BadRequest(message=adasd)
      */
-    fun fromJson(text: String, clazz: Class<*>) = gson.fromJson(text, clazz)
+    fun <T>fromJson(text: String, clazz: Class<T>):T = gson.fromJson(text, clazz)
 }
