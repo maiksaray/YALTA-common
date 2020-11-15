@@ -1,16 +1,19 @@
 package common
 
-import kotlinx.serialization.Serializable
-import kotlinx.serialization.encodeToString
-import kotlinx.serialization.json.Json
 
-@Serializable
-sealed class Error{abstract val message: String}
+sealed class Error {
+    abstract val message: String
+}
 
-@Serializable
-data class InvalidCredentials(override val message:String) : Error()
+data class InvalidCredentials(override val message: String) : Error()
 
-@Serializable
 data class Unauthorized(override val message: String) : Error()
 
-fun encode(err: Error) = Json.encodeToString(err)
+data class BadRequest(override val message: String) : Error()
+
+object ErrorAdaper {
+    val factory = HierarchyTypeAdapterFactory.of(Error::class.java)
+            .registerSubtype(InvalidCredentials::class.java)
+            .registerSubtype(Unauthorized::class.java)
+            .registerSubtype(BadRequest::class.java)
+}
