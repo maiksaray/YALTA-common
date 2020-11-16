@@ -166,7 +166,7 @@ class HierarchyTypeAdapterFactory<T> private constructor(
 
 object Serialization {
     val gson = GsonBuilder()
-            .registerTypeAdapterFactory(ErrorAdaper.factory)
+            .registerTypeAdapterFactory(ErrorAdapter.factory)
             .registerTypeAdapterFactory(RoleAdapter.factory)
             .create()
 
