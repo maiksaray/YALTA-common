@@ -6,6 +6,13 @@ import com.google.gson.reflect.TypeToken
 import com.google.gson.stream.JsonReader
 import com.google.gson.stream.JsonWriter
 import java.io.IOException
+import java.sql.Timestamp
+import java.time.Instant
+import java.time.format.DateTimeFormatter
+import java.time.temporal.TemporalAccessor
+
+
+
 
 /**
  * It allows to register hierarchy serialization with exact type as json field:
@@ -164,10 +171,26 @@ class HierarchyTypeAdapterFactory<T> private constructor(
     }
 }
 
+class TimestampAdapter : TypeAdapter<Timestamp>() {
+    override fun write(out: JsonWriter?, value: Timestamp?) {
+        out!!.value(value!!.toInstant().toString())
+    }
+
+    override fun read(`in`: JsonReader?): Timestamp {
+//        TODO: rework this
+        val s = `in`!!.nextString()
+        val ta: TemporalAccessor = DateTimeFormatter.ISO_INSTANT.parse(s)
+        val i: Instant = Instant.from(ta)
+        return Timestamp.from(i)
+    }
+
+}
+
 object Serialization {
     val gson = GsonBuilder()
             .registerTypeAdapterFactory(ErrorAdapter.factory)
             .registerTypeAdapterFactory(RoleAdapter.factory)
+            .registerTypeAdapter(Timestamp::class.java, TimestampAdapter())
             .create()
 
     /**
