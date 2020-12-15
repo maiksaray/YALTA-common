@@ -185,7 +185,7 @@ object Serialization {
     val gson = GsonBuilder()
             .registerTypeAdapterFactory(ErrorAdapter.factory)
             .registerTypeAdapterFactory(RoleAdapter.factory)
-            .registerTypeAdapter(Instant::class.java, DateTimeAdapter())
+            .registerTypeAdapter(DateTime::class.java, DateTimeAdapter())
             .create()
 
     /**
