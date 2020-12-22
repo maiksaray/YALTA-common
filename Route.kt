@@ -9,10 +9,10 @@ data class RoutePoint(val id: Long?, val point: Point, val visited: Boolean, val
 data class Route(val id: Long?,
                  val driverId: Long?,
                  val routeDate: DateTime,
-                 val points: java.util.List<RoutePoint>,
+                 val points: List<RoutePoint>,
                  val finished: Boolean)
 
-data class CreateRoute(val routeDate: DateTime, val driverId: Long?, val points: java.util.List<Point>)
+data class CreateRoute(val routeDate: DateTime, val driverId: Long?, val points: List<Point>)
 
 data class AssignDriver(val driverId: Long)
 
