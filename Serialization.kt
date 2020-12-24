@@ -8,8 +8,7 @@ import com.google.gson.stream.JsonWriter
 import org.joda.time.DateTime
 import org.joda.time.format.ISODateTimeFormat
 import java.io.IOException
-import java.time.Instant
-
+import java.lang.reflect.Type
 
 /**
  * It allows to register hierarchy serialization with exact type as json field:
@@ -199,4 +198,12 @@ object Serialization {
      *  fromJson(BadRequestString, Error::class.java) # BadRequest(message=adasd)
      */
     fun <T>fromJson(text: String, clazz: Class<T>):T = gson.fromJson(text, clazz)
+
+    /**
+     * Can deserialize Json string if Type is passed
+     *  val type = TypeToken.getParameterized(List::class.java, MyClass::class.java).type
+     *  val request = [{"id":1,"name":"first"},{"id":2,"name":"second"}]
+     *  fromJson(request, type)) #List<MyClass>[{id=1, name="first"}, {id=2, name="second"}]
+     */
+    fun <T>fromJson(text: String, type: Type):T = gson.fromJson(text, type)
 }
