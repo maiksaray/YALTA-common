@@ -4,7 +4,7 @@ import org.joda.time.DateTime
 
 data class Point(val id: Long?, val lat: Double, val lon: Double, val name: String)
 
-data class RoutePoint(val id: Long?, val point: Point, val visited: Boolean, val index:Long)
+data class RoutePoint(val id: Long?, val point: Point, val visited: Boolean, val index: Long, val updated: DateTime)
 
 data class Route(val id: Long?,
                  val driverId: Long?,
